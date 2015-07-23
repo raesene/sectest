@@ -36,8 +36,8 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	libssl-dev
 
-#Setup nmap
-RUN git clone https://github.com/nmap/nmap.git && \
+#Install nmap
+RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
 	cd nmap && \
 	./configure --without-zenmap && \
 	make && \
@@ -45,12 +45,23 @@ RUN git clone https://github.com/nmap/nmap.git && \
 	rm -rf ../nmap
 
 #Install Metasploit
-RUN git clone https://github.com/rapid7/metasploit-framework.git && \
+RUN git clone --depth=1 https://github.com/rapid7/metasploit-framework.git && \
 	cd metasploit-framework && \
 	gem install bundler && \
 	bundle install 
 
 #Install Testing Scripts
-RUN git clone https://github.com/raesene/TestingScripts.git && \
+RUN git clone --depth=1 https://github.com/raesene/TestingScripts.git && \
 	cd TestingScripts && \
 	bundle install
+
+
+#Install Nikto Pre-reqs
+RUN apt-get install -y \
+	libnet-ssleay-perl
+
+#Install Nikto
+RUN git clone --depth=1 https://github.com/sullo/nikto.git
+
+#Install Fuzzdb
+RUN svn checkout http://fuzzdb.googlecode.com/svn/trunk/ fuzzdb
