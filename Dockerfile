@@ -61,7 +61,9 @@ RUN apt-get install -y \
 	libnet-ssleay-perl
 
 #Install Nikto
-RUN git clone --depth=1 https://github.com/sullo/nikto.git
+RUN git clone --depth=1 https://github.com/sullo/nikto.git && \
+	cd nikto/program && \
+	./nikto.pl -update
 
-#Install Fuzzdb
-RUN svn checkout http://fuzzdb.googlecode.com/svn/trunk/ fuzzdb
+#Install SecLists
+RUN git clone https://github.com/danielmiessler/SecLists.git
