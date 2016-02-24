@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ubuntu:latest
 
 MAINTAINER Rory McCune <rorym@mccune.org.uk>
 
@@ -36,6 +36,22 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	libssl-dev
 
+#Install Ruby
+RUN curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.8.tar.gz" \
+	&& mkdir -p /usr/src/ruby \
+	&& tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1 \
+	&& rm ruby.tar.gz \
+	&& cd /usr/src/ruby \
+	&& ./configure --disable-install-doc \
+	&& make -j"$(nproc)" \
+	&& make install \
+	&& gem update --system $RUBYGEMS_VERSION \
+	&& rm -r /usr/src/ruby
+
+#Install Bundler
+RUN gem install bundler
+
+
 #Install nmap
 RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
 	cd nmap && \
@@ -66,4 +82,4 @@ RUN git clone --depth=1 https://github.com/sullo/nikto.git && \
 	./nikto.pl -update
 
 #Install SecLists
-RUN git clone https://github.com/danielmiessler/SecLists.git
+#RUN git clone https://github.com/danielmiessler/SecLists.git
