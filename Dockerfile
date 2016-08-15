@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
 
 MAINTAINER Rory McCune <rorym@mccune.org.uk>
 
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y \
 	libssl-dev
 
 #Install Ruby
-RUN curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.8.tar.gz" \
+RUN curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz" \
 	&& mkdir -p /usr/src/ruby \
 	&& tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1 \
 	&& rm ruby.tar.gz \
