@@ -59,7 +59,6 @@ RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
 #Install Metasploit
 RUN git clone --depth=1 https://github.com/rapid7/metasploit-framework.git && \
 	cd metasploit-framework && \
-	gem install bundler && \
 	bundle install 
 
 #Install Testing Scripts
