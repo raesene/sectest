@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	libssl-dev \
 	ruby \
+	net-tools \
 	ruby-dev
 
 #Install nmap
