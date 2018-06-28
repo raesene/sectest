@@ -4,6 +4,9 @@ MAINTAINER Rory McCune <rorym@mccune.org.uk>
 
 WORKDIR /opt/
 
+#Localtime hack
+COPY localtime /etc/localtime
+
 #General packages and pre-reqs for tools like Metasploit
 RUN apt-get update && apt-get install -y \
 	build-essential \
@@ -29,24 +32,13 @@ RUN apt-get update && apt-get install -y \
 	zlib1g-dev \
 	libxml2-dev \
 	libxslt1-dev \
-	vncviewer \
 	libyaml-dev \
 	ssh \
 	slurm \
 	curl \
-	libssl-dev
-
-#Install Ruby
-RUN curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz" \
-	&& mkdir -p /usr/src/ruby \
-	&& tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1 \
-	&& rm ruby.tar.gz \
-	&& cd /usr/src/ruby \
-	&& ./configure --disable-install-doc \
-	&& make -j"$(nproc)" \
-	&& make install \
-	&& gem update --system $RUBYGEMS_VERSION \
-	&& rm -r /usr/src/ruby
+	libssl-dev \
+	ruby \
+	ruby-dev
 
 #Install nmap
 RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
@@ -55,6 +47,8 @@ RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
 	make && \
 	make install && \
 	rm -rf ../nmap
+
+RUN gem install bundler
 
 #Install Metasploit
 RUN git clone --depth=1 https://github.com/rapid7/metasploit-framework.git && \
