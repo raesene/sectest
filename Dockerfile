@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER Rory McCune <rorym@mccune.org.uk>
 
@@ -76,5 +76,8 @@ RUN git clone --depth=1 https://github.com/sullo/nikto.git && \
 	cd nikto/program && \
 	./nikto.pl -update
 
-#Install SecLists
-#RUN git clone https://github.com/danielmiessler/SecLists.git
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+#We can run this but lets let it be overridden with a CMD 
+CMD ["/entrypoint.sh"]
