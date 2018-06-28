@@ -21,11 +21,16 @@ IPADDRESS="$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print 
 echo IP Address: $IPADDRESS
 }
 
+__enable_root_login() {
+echo "PermitRootLogin Yes" >> /etc/ssh/sshd_config
+}
+
 
 # Call all functions
 __create_rundir
 __create_hostkeys
 __create_user
 __ip_address
+__enable_root_login
 
 exec /usr/sbin/sshd -D -e "$@"
