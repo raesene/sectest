@@ -17,7 +17,7 @@ ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
 }
 
 __ip_address() {
-IPADDRESS="$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')"
+IPADDRESS="$(/sbin/ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}')"
 echo IP Address: $IPADDRESS
 }
 
