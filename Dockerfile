@@ -48,6 +48,8 @@ RUN curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1
 	&& gem update --system $RUBYGEMS_VERSION \
 	&& rm -r /usr/src/ruby
 
+RUN gem install bundler -v '1.17.3'
+
 #Install nmap
 RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
 	cd nmap && \
