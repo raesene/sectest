@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y \
 	net-tools \
 	ruby-dev
 
-RUN gem install bundler -v '1.17.3'
+RUN gem install bundler -v '2.1.4'
 
 #Install nmap
 RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
