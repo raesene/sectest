@@ -69,9 +69,7 @@ RUN apt-get install -y \
 	libnet-ssleay-perl
 
 #Install Nikto
-RUN git clone --depth=1 https://github.com/sullo/nikto.git && \
-	cd nikto/program && \
-	./nikto.pl -update
+RUN git clone --depth=1 https://github.com/sullo/nikto.git 
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
