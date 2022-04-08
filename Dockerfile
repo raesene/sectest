@@ -1,6 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-MAINTAINER Rory McCune <rorym@mccune.org.uk>
+LABEL org.opencontainers.image.authors="rorym@mccune.org.uk"
 
 WORKDIR /opt/
 
@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y \
 	net-tools \
 	ruby-dev
 
-RUN gem install bundler -v '2.1.4'
+RUN gem install bundler 
 
 #Install nmap
 RUN git clone --depth=1 https://github.com/nmap/nmap.git && \
